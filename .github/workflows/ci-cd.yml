@@ -69,7 +69,7 @@ jobs:
  
       - name: Ensure Java is installed on remote
         run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
-          "sudo apt update && sudo apt install -y openjdk-17-jre"
+          "sudo apt update && sudo apt install -y openjdk-${{ matrix.java }}-jre"
  
       - name: Start Spring PetClinic
         run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
