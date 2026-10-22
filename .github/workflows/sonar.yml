@@ -22,7 +22,7 @@ jobs:
         run: mvn clean verify
  
       - name: Run SonarQube analysis
-        run: mvn sonar:sonar \
+        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=YourProjectKey \
           -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
