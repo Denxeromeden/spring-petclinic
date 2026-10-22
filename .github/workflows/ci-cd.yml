@@ -68,8 +68,10 @@ jobs:
         run: scp -o StrictHostKeyChecking=no target/spring-petclinic-*.jar ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/
  
       - name: Ensure Java is installed on remote
+        env:
+          JAVA_VERSION: ${{ matrix.java }}
         run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
-          "sudo apt update && sudo apt install -y openjdk-${{ matrix.java }}-jre"
+          "sudo apt update && sudo apt install -y openjdk-${JAVA_VERSION}-jre"
  
       - name: Start Spring PetClinic
         run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
