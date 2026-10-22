@@ -44,6 +44,9 @@ jobs:
  
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '21' ]
     needs: [ build ]
  
     steps:
@@ -69,9 +72,8 @@ jobs:
  
       - name: Ensure Java is installed on remote
         env:
-          JAVA_VERSION: ${{ matrix.java }}
         run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
-          "sudo apt update && sudo apt install -y openjdk-${JAVA_VERSION}-jre"
+          "sudo apt update && sudo apt install -y openjdk-${{ matrix.java }}-jre"
  
       - name: Start Spring PetClinic
         run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
