@@ -27,11 +27,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
           SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
         run: >
           mvn -B clean verify
           org.sonarsource.scanner.maven:sonar-maven-plugin:5.8.0.7211:sonar
           -Dsonar.projectKey="$SONAR_PROJECT_KEY"
-          -Dsonar.organization="$SONAR_ORGANIZATION"
           -Dsonar.host.url="$SONAR_HOST_URL"
